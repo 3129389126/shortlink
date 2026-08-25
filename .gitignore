@@ -37,3 +37,5 @@ build/
 
 ### Mac OS ###
 .DS_Store
+### IDE 数据库连接配置（含个人本机信息）
+.idea/dataSources.xml
