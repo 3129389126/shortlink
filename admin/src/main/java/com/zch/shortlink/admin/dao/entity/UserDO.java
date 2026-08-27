@@ -1,12 +1,19 @@
 package com.zch.shortlink.admin.dao.entity;
 
+import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.util.Date;
 
+/*
+* 用户持久层实体
+* */
+@Data
+@TableName("t_user")
 public class UserDO {
 
-
     /**
-     * id
+     * ID
      */
     private Long id;
 
@@ -51,7 +58,8 @@ public class UserDO {
     private Date updateTime;
 
     /**
-     * 删除标识0未删除1已删除
+     * 删除标识 0：未删除 1：已删除
      */
     private Integer delFlag;
+
 }
