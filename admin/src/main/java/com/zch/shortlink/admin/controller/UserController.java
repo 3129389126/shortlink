@@ -1,6 +1,7 @@
 package com.zch.shortlink.admin.controller;
 
 import com.zch.shortlink.admin.commom.convention.result.Result;
+import com.zch.shortlink.admin.commom.convention.result.Results;
 import com.zch.shortlink.admin.commom.enums.UserErrorCodeEnum;
 import com.zch.shortlink.admin.dto.resp.UserRespDTO;
 import com.zch.shortlink.admin.service.UserService;
@@ -27,7 +28,7 @@ public class UserController {
         if (result==null) {
             return new Result<UserRespDTO>().setCode(UserErrorCodeEnum.USER_NULL.code()).setMessage(UserErrorCodeEnum.USER_NULL.message());
         }else{
-            return new Result<UserRespDTO>().setCode("0").setData(result);
+             return Results.success(result);
         }
 
     }

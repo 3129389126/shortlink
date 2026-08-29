@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.zch.shortlink.admin.commom.convention.exception.ClientException;
+import com.zch.shortlink.admin.commom.enums.UserErrorCodeEnum;
 import com.zch.shortlink.admin.dao.entity.UserDO;
 import com.zch.shortlink.admin.dao.mapper.UserMapper;
 import com.zch.shortlink.admin.dto.resp.UserRespDTO;
@@ -22,14 +24,13 @@ public class UserServiceimpl extends ServiceImpl<UserMapper, UserDO> implements 
         LambdaQueryWrapper<UserDO> queryWrapper = Wrappers.lambdaQuery(UserDO.class)
                 .eq(UserDO::getUsername, username);
         UserDO userDO =baseMapper.selectOne(queryWrapper);
-        UserRespDTO result = new UserRespDTO();
 
-        if(userDO!=null){
-            BeanUtils.copyProperties(userDO,result);//此方法用于判空，不写的话，在我的Result那里会报错
-            return result;
+        if(userDO == null) {
+           throw new ClientException(UserErrorCodeEnum.USER_NULL);
         }
-        else{
-            return null;
-        }
+
+        UserRespDTO result = new UserRespDTO();
+        BeanUtils.copyProperties(userDO,result);//此方法用于判空，不写的话，在我的Result那里会报错
+        return result;
     }
 }
