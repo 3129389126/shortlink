@@ -6,16 +6,16 @@ import lombok.Data;
 import java.util.Date;
 
 /*
-* 用户持久层实体
+* 用户持久层实体 专门负责把数据存进数据库、再从数据库读出来  DO Data Object 数据对象  服务于数据库
 * */
 @Data
-@TableName("t_user")
+@TableName("t_user") //告诉 ORM“我对应哪张表”
 public class UserDO {
 
     /**
      * ID
      */
-    private Long id;
+    private Long id; //Long是包装类，是可以为null的
 
     /**
      * 用户名

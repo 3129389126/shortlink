@@ -1,12 +1,12 @@
-package com.zch.shortlink.admin.commom.web;
+package com.zch.shortlink.admin.common.web;
 
 
 import cn.hutool.core.collection.CollectionUtil;
 import cn.hutool.core.util.StrUtil;
-import com.zch.shortlink.admin.commom.convention.errorcode.BaseErrorCode;
-import com.zch.shortlink.admin.commom.convention.exception.AbstractException;
-import com.zch.shortlink.admin.commom.convention.result.Result;
-import com.zch.shortlink.admin.commom.convention.result.Results;
+import com.zch.shortlink.admin.common.convention.errorcode.BaseErrorCode;
+import com.zch.shortlink.admin.common.convention.exception.AbstractException;
+import com.zch.shortlink.admin.common.convention.result.Result;
+import com.zch.shortlink.admin.common.convention.result.Results;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
@@ -24,16 +24,17 @@ import java.util.Optional;
  * 全局异常处理器
  *
  */
-@Component //可以被spring接管
-@Slf4j
+@Component //使其可以被spring接管
+@Slf4j //编译器生成日志对象，统一的话筒接口，底下接 Logback 等具体实现，代码不变就能换日志实现。
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
     /**
      * 拦截参数验证异常
      */
-    @SneakyThrows
-    @ExceptionHandler(value = MethodArgumentNotValidException.class)
+    @SneakyThrows //throw时的简化代码
+    @ExceptionHandler(value = MethodArgumentNotValidException.class)//每个被加载的类在 JVM 里都有一个 Class 对象代表它
+    //HttpServletRequest Servlet 规范的请求对象，封装本次 HTTP 请求的一切
     public Result validExceptionHandler(HttpServletRequest request, MethodArgumentNotValidException ex) {
         BindingResult bindingResult = ex.getBindingResult();
         FieldError firstFieldError = CollectionUtil.getFirst(bindingResult.getFieldErrors());

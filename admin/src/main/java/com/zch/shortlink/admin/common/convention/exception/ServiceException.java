@@ -1,8 +1,8 @@
-package com.zch.shortlink.admin.commom.convention.exception;
+package com.zch.shortlink.admin.common.convention.exception;
 
 
-import com.zch.shortlink.admin.commom.convention.errorcode.BaseErrorCode;
-import com.zch.shortlink.admin.commom.convention.errorcode.IErrorCode;
+import com.zch.shortlink.admin.common.convention.errorcode.BaseErrorCode;
+import com.zch.shortlink.admin.common.convention.errorcode.IErrorCode;
 
 import java.util.Optional;
 

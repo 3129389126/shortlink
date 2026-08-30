@@ -1,6 +1,6 @@
-package com.zch.shortlink.admin.commom.enums;
+package com.zch.shortlink.admin.common.enums;
 
-import com.zch.shortlink.admin.commom.convention.errorcode.IErrorCode;
+import com.zch.shortlink.admin.common.convention.errorcode.IErrorCode;
 
 public enum UserErrorCodeEnum implements IErrorCode {
 
