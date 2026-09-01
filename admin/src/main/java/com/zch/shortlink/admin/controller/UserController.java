@@ -40,7 +40,9 @@ public class UserController {
         return Results.success(BeanUtil.toBean(userService.getUserByUsername(username),UserActualRespDTO.class));
     }
 
-
+    /**
+     *查询用户名是否存在
+     */
     @GetMapping("/api/shortlink/v1/user/has-username")
     public Result<Boolean> hasUsername(@RequestParam("username") String username){
         return Results.success(userService.hasUsername(username));

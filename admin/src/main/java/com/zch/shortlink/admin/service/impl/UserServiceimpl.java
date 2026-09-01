@@ -51,8 +51,7 @@ public class UserServiceimpl extends ServiceImpl<UserMapper, UserDO> implements 
         LambdaQueryWrapper<UserDO> queryWrapper = Wrappers.lambdaQuery(UserDO.class)
                 .eq(UserDO::getUsername, username);
         UserDO userDO = baseMapper.selectOne(queryWrapper);
-        return userDO == null ;
+        return userDO != null ;
     }
-
 
 }
