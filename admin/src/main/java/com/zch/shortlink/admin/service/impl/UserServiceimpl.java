@@ -1,6 +1,7 @@
 package com.zch.shortlink.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zch.shortlink.admin.common.convention.exception.ClientException;
@@ -43,4 +44,15 @@ public class UserServiceimpl extends ServiceImpl<UserMapper, UserDO> implements 
         BeanUtils.copyProperties(userDO,result);//此方法用于判空，不写的话，在我的Result那里会报错
         return result;
     }
+
+    @Override
+    public Boolean hasUsername(String username) {
+
+        LambdaQueryWrapper<UserDO> queryWrapper = Wrappers.lambdaQuery(UserDO.class)
+                .eq(UserDO::getUsername, username);
+        UserDO userDO = baseMapper.selectOne(queryWrapper);
+        return userDO == null ;
+    }
+
+
 }

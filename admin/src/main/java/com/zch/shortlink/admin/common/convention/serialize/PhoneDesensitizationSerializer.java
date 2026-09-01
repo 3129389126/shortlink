@@ -9,7 +9,7 @@ import com.fasterxml.jackson.databind.SerializerProvider;
 import java.io.IOException;
 
 
-/**
+/*
  * 手机号脱敏反序列化
  */
 //JsonSerializer<String> 是 Jackson（Spring 默认的 JSON 库）提供的扩展点：泛型填 String = “我这个自定义序列化器专门处理 String 类型的字段”。
