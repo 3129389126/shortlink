@@ -1,7 +1,6 @@
 package com.zch.shortlink.admin.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.zch.shortlink.admin.common.convention.exception.ClientException;
@@ -10,6 +9,8 @@ import com.zch.shortlink.admin.dao.entity.UserDO;
 import com.zch.shortlink.admin.dao.mapper.UserMapper;
 import com.zch.shortlink.admin.dto.resp.UserRespDTO;
 import com.zch.shortlink.admin.service.UserService;
+import lombok.RequiredArgsConstructor;
+import org.redisson.api.RBloomFilter;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -19,8 +20,12 @@ import org.springframework.stereotype.Service;
 //  ServiceImpl 是 MyBatis Plus 提供的通用 Service 实现基类。
 // 它内部已经帮你写好了全套 CRUD——save()、getById()、updateById()、removeById()、批量操作、分页查询……
 // 泛型中，第一个数据填UserMapper 让MP知道通过哪个 Mapper 操作数据库   第二个数据让MP知道操作的实体是哪个类
+//@Service  把 UserServiceImpl 注册成 Bean，交给 IoC 容器
 @Service
+@RequiredArgsConstructor
 public class UserServiceimpl extends ServiceImpl<UserMapper, UserDO> implements UserService {
+
+    private  final RBloomFilter<String> userRegisterCachePenetrationBloomFilter;
 
     // LambdaQueryWrapper<UserDO>  专门给 UserDO 用的条件构造器
     //Wrappers 是 MyBatis-Plus 的工具类，lambdaQuery(...) 是它的静态方法：“给我造一个针对 UserDO 这张表的条件构造器”。
@@ -48,10 +53,7 @@ public class UserServiceimpl extends ServiceImpl<UserMapper, UserDO> implements 
     @Override
     public Boolean hasUsername(String username) {
 
-        LambdaQueryWrapper<UserDO> queryWrapper = Wrappers.lambdaQuery(UserDO.class)
-                .eq(UserDO::getUsername, username);
-        UserDO userDO = baseMapper.selectOne(queryWrapper);
-        return userDO != null ;
+        return userRegisterCachePenetrationBloomFilter.contains(username);
     }
 
 }

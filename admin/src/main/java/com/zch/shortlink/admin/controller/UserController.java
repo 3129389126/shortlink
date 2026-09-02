@@ -10,11 +10,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController
+import org.springframework.web.bind.annotation.RestController;
 
 /*
 * 用户管理控制层
 * */
+//@RestController Spring MVC 把 HTTP 请求路由到这个类
 @RestController
 @RequiredArgsConstructor//编译期自动生成一个包含所有 final 字段的构造方法
 public class UserController {
