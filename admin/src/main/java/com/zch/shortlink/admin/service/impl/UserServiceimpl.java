@@ -18,6 +18,7 @@ import org.redisson.api.RedissonClient;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
+import static com.zch.shortlink.admin.common.constant.RedisCacheConstant.LOG_USER_REGISTER_KEY;
 import static com.zch.shortlink.admin.common.enums.UserErrorCodeEnum.USER_NAME_EXIST;
 import static com.zch.shortlink.admin.common.enums.UserErrorCodeEnum.USER_SAVE_ERROR;
 
@@ -70,7 +71,7 @@ public class UserServiceimpl extends ServiceImpl<UserMapper, UserDO> implements 
         if(!hasUsername(requestParam.getUsername())){
             throw new ClientException(USER_NAME_EXIST);
         }
-        RLock lock = redissonClient.getLock("LOG_USER_REGISTER_KEY" + requestParam.getUsername());
+        RLock lock = redissonClient.getLock(LOG_USER_REGISTER_KEY + requestParam.getUsername());
 
         try{
             if(lock.tryLock())
