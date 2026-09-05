@@ -4,6 +4,7 @@ import cn.hutool.core.bean.BeanUtil;
 import com.zch.shortlink.admin.common.convention.result.Result;
 import com.zch.shortlink.admin.common.convention.result.Results;
 import com.zch.shortlink.admin.dto.req.UserRegisterReqDTO;
+import com.zch.shortlink.admin.dto.req.UserUpdateReqDTO;
 import com.zch.shortlink.admin.dto.resp.UserActualRespDTO;
 import com.zch.shortlink.admin.dto.resp.UserRespDTO;
 import com.zch.shortlink.admin.service.UserService;
@@ -59,4 +60,16 @@ public class UserController {
         userService.register(requestParam);
         return Results.success();
     }
+
+
+    /**
+     *修改用户
+     */
+    @PutMapping("/api/short-link/v1/user")
+    //@RequestBody：这个参数的值不在 URL 上，而是藏在 HTTP 请求体（Body）里——请把 Body 里的 JSON 按字段名装进这个 Java 对象
+    public Result<Void> update(@RequestBody UserUpdateReqDTO requestParam){
+        userService.update(requestParam);
+        return Results.success();
+    }
+
 }

@@ -4,6 +4,7 @@ package com.zch.shortlink.admin.service;
 import com.baomidou.mybatisplus.extension.service.IService;
 import com.zch.shortlink.admin.dao.entity.UserDO;
 import com.zch.shortlink.admin.dto.req.UserRegisterReqDTO;
+import com.zch.shortlink.admin.dto.req.UserUpdateReqDTO;
 import com.zch.shortlink.admin.dto.resp.UserRespDTO;
 
 /*
@@ -36,5 +37,11 @@ public interface UserService extends IService<UserDO> {
      */
     //requestParam 它是 Controller 里 @RequestBody 触发 Jackson 把前端 JSON 反序列化出来的对象
     void register(UserRegisterReqDTO requestParam);
+
+    /***
+     * 根据用户名修改用户
+     * @param requestParam  修改用户请求参数
+     */
+    void update(UserUpdateReqDTO requestParam);
 
 }
