@@ -1,8 +1,13 @@
 package com.zch.shortlink.admin.controller;
 
 
+import com.zch.shortlink.admin.common.convention.result.Result;
+import com.zch.shortlink.admin.common.convention.result.Results;
+import com.zch.shortlink.admin.dto.req.ShortLinkGroupSaveReqDTO;
 import com.zch.shortlink.admin.service.GroupService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 
@@ -14,4 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 public class GroupController {
 
     private final GroupService groupService;
+
+    @PostMapping("/api/short-link/v1/user/group")
+    public Result<Void> save(@RequestBody ShortLinkGroupSaveReqDTO requestParam){
+        groupService.saveGroup(requestParam.getName());
+        return Results.success();
+    }
 }
